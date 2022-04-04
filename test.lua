@@ -18,6 +18,7 @@ function mario_on_set_action(m)
     if (m.action == ACT_TRIPLE_JUMP) then -- if mario triple jumps
         set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
         set_anim_to_frame(m, 1)
+        mario_blow_off_cap(m, 1) --maker mario lose his cap
         print("triple jumped")
     end
 
@@ -25,6 +26,13 @@ function mario_on_set_action(m)
         set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
         set_anim_to_frame(m, 1)
         print("long jumped")
+    end
+
+    if (m.action == ACT_CROUCHING) then -- if mario long jumps, not working
+        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
+        set_anim_to_frame(m, 1)
+        mario_retrieve_cap(m) --mario mario get his cap back, he doesnt put it on though, i need to fix that
+        print("crouched")
     end
 end
 
