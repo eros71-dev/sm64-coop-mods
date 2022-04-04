@@ -9,14 +9,14 @@ function mario_on_set_action(m)
         print("triple jumped")
     end
 
-    if (m.action == ACT_CROUCHING) then -- if mario crouches
+    if (m.action == ACT_START_CROUCHING) then -- if mario starts crouching
         mario_retrieve_cap(m) --mario gets his cap back, he doesnt put it on though, i need to fix that
         print("crouched")
     end
 
-    if (m.action == ACT_CROUCHING) then -- if mario finishes crouching
+    if (m.action == ACT_STOP_CROUCHING) then -- if mario finishes crouching
         cutscene_put_cap_on(m) -- make mario put his cap on
-        print("crouched")
+        print("finished crouching")
     end
 end
 
