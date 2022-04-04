@@ -1,37 +1,21 @@
 -- name: test
 -- description: test
--- unfinished
+-- unfinished, and i'm tired as I wrote this so expect dumb code mistakes and grammar mistakes
 --- @param m MarioState
 function mario_on_set_action(m)
-    if (m.action == ACT_JUMP) then -- if mario jumps
-        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
-        set_anim_to_frame(m, 1)
-        print("jumped")
-    end
-
-    if (m.action == ACT_DOUBLE_JUMP) then -- if mario double jumps
-        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
-        set_anim_to_frame(m, 1)
-        print("double jumped")
-    end
 
     if (m.action == ACT_TRIPLE_JUMP) then -- if mario triple jumps
-        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
-        set_anim_to_frame(m, 1)
-        mario_blow_off_cap(m, 1) --maker mario lose his cap
+        mario_blow_off_cap(m, 1) --maker mario lose his cap, no idea on how to actually make the cap fly off his head
         print("triple jumped")
     end
 
-    if (m.action == ACT_LONG_JUMP) then -- if mario long jumps, not working
-        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
-        set_anim_to_frame(m, 1)
-        print("long jumped")
+    if (m.action == ACT_CROUCHING) then -- if mario crouches
+        mario_retrieve_cap(m) --mario gets his cap back, he doesnt put it on though, i need to fix that
+        print("crouched")
     end
 
-    if (m.action == ACT_CROUCHING) then -- if mario long jumps, not working
-        set_mario_animation(m, MARIO_ANIM_TRIPLE_JUMP_LAND) -- replace animation, not working
-        set_anim_to_frame(m, 1)
-        mario_retrieve_cap(m) --mario mario get his cap back, he doesnt put it on though, i need to fix that
+    if (m.action == ACT_CROUCHING) then -- if mario finishes crouching
+        cutscene_put_cap_on(m) -- make mario put his cap on
         print("crouched")
     end
 end
