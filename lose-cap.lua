@@ -5,7 +5,8 @@
 function mario_on_set_action(m)
 
     if (m.action == ACT_TRIPLE_JUMP or m.action == ACT_RELEASING_BOWSER or m.action == ACT_SOFT_BONK) then -- if mario triple jumps
-        mario_blow_off_cap(m, 4) --supposedly make the player lose their cap
+        mario_blow_off_cap(m, 5)
+        m.flags = m.flags & ~MARIO_CAP_ON_HEAD --supposedly make the player lose their cap
         -- no idea on how to actually make the cap fly off his head, it just does nothing
         play_character_sound(m, CHAR_SOUND_WHOA)
         print("triple jumped")
