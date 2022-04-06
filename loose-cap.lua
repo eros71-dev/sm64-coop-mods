@@ -1,40 +1,42 @@
 -- name: Loose cap
--- description: Your cap is not sautered onto your skull correctly anymore.\n\nSpecial thanks to Agent X, mod by eros71.
+-- description: Your cap is not sautered onto your skull correctly anymore.\n\nSpecial thanks to Agent X for the name, mod by eros71.
 
-local triggerActions = {
-    ACT_TRIPLE_JUMP, ACT_RELEASING_BOWSER,
-    ACT_SOFT_BONK, ACT_DEATH_ON_BACK,
-    ACT_THROWN_BACKWARD, ACT_FALL_AFTER_STAR_GRAB
-}
-
+local capDropped = false;
 local localMario = gMarioStates[0];
 
 function mario_on_set_action(m)
 
+    if (m.action == ACT_START_CROUCHING and m.flags & ~MARIO_CAP_IN_HAND) then
+        cutscene_put_cap_on(localMario)
+    end
+
     if (
-        m.action == ACT_TRIPLE_JUMP or 
         m.action == ACT_RELEASING_BOWSER or 
         m.action == ACT_SOFT_BONK or 
         m.action == ACT_DEATH_ON_BACK or
         m.action == ACT_THROWN_BACKWARD or
-        m.action == ACT_FALL_AFTER_STAR_GRAB
+        m.action == ACT_FALL_AFTER_STAR_GRAB or
+        m.action == ACT_DISAPPEARED or
+        m.action == ACT_FREEFALL
     ) then
-        mario_blow_off_cap(m, 5) -- Not sure why, but it only seems to work if you jump into a wall. Just jump, no actual bonking into it.
-        mario_set_flag(~MARIO_CAP_ON_HEAD)
-        play_character_sound(m, CHAR_SOUND_WHOA)
+        mario_blow_off_cap(localMario, 5)
+        capDropped = true;
+        --TODO: Figure out how to make the player not take the cap back right away as soon as it gets off their head.
+        play_character_sound(localMario, CHAR_SOUND_WHOA)
     end
 
 end
 
--- Should give Mario his cap back if he exits the level, non-functional right now.
-function on_pause_exit()
-    mario_retrieve_cap(localMario)
-end
-
--- Retrieve cap command, non-functional right now, as always.
+-- Retrieve cap command, non-functional right now.
 function on_retrieve_command()
+    --TODO: Check if cap was dropped already from the player's head, and if so, make this remove *this player's* cap from the floor.
+    -- Not that it matters too much right now since probably nothing is networked yet.
+    if capDropped then
+        
+    end
     if (localMario.flags & ~MARIO_CAP_ON_HEAD) then --if the retrieve command is executed and mario is not wearing a cap
         mario_retrieve_cap(localMario)
+        cutscene_put_cap_on(localMario)
         return true
     elseif (localMario.flags & MARIO_CAP_ON_HEAD) then -- if Mario is wearing his cap
         djui_chat_message_create('You already have your cap on.')
