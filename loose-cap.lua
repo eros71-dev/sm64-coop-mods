@@ -1,5 +1,5 @@
--- name: Loose cap.
--- description: Your cap is not sautered onto your skull correctly anymore. Special thanks to Agent X.
+-- name: Loose cap
+-- description: Your cap is not sautered onto your skull correctly anymore.\n\nSpecial thanks to Agent X, mod by eros71.
 
 local triggerActions = {
     ACT_TRIPLE_JUMP, ACT_RELEASING_BOWSER,
