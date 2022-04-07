@@ -5,8 +5,7 @@ local localMario = gMarioStates[0];
 
 function mario_on_set_action(localMario)
 
-    if (localMario.action == ACT_START_CROUCHING and localMario.flags & MARIO_CAP_IN_HAND) then --aways exectutes when the player crouches,
-        -- no idea why
+    if (localMario.action == ACT_START_CROUCHING and localMario.flags & MARIO_CAP_IN_HAND) then --aways exectutes when the player crouches, no idea why
         cutscene_put_cap_on(localMario)
     end
 
@@ -26,7 +25,7 @@ function mario_on_set_action(localMario)
 
 end
 
--- Retrieve cap command, non-functional right now.
+-- Retrieve cap command.
 function on_retrieve_command(localMario)
     if (localMario.flags & ~MARIO_CAP_ON_HEAD) then --if the retrieve command is executed and mario is not wearing a cap
         obj_mark_for_deletion(cap) --TODO: Delete the cap from the level once it's given back to the player. How do I actually mark the cap?
