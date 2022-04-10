@@ -9,6 +9,8 @@ function on_hurt(a, v) --modified from the hide-and-seek mod
     local attacker = gMarioStates[a]
     local victim = gMarioStates[v]
 
+    print(attacker .. "attacked" .. victim)
+
     -- only consider local player
     if victim.playerIndex ~= 0 then
         return
