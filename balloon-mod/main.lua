@@ -4,6 +4,8 @@
 
 E_MODEL_BALLOON = smlua_model_util_get_id("balloon_geo")
 local canHaveBalloon = true
+local float = false
+local firstTimeDone = false
 
 function mario_update_local(m)
     --if not the local player, ignore the rest of the function
@@ -67,9 +69,36 @@ function mario_update_local(m)
             end
         end
 
-        if m.animation == ACT_SLEEPING and sticker ~= nil then
-            m.vel.y = 20.2
+        if m.action == ACT_SLEEPING then 
+            float = true
         end
+
+        if float then
+            set_mario_animation(m, MARIO_ANIM_SLEEP_IDLE)
+            if firstTimeDone then
+                m.vel.y = 20
+            end
+            if not firstTimeDone then
+                set_mario_action(m, ACT_FREEFALL, 0)
+                m.pos.y = m.pos.y + 5
+                firstTimeDone = true
+            end
+        else
+            firstTimeDone = false
+        end
+        
+        if float and (
+                m.faceAngle.y ~= m.intendedYaw
+                or m.action ~= ACT_FREEFALL
+                or (m.input & INPUT_A_PRESSED) ~= 0
+                or (m.input & INPUT_B_PRESSED) ~= 0
+                or (m.input & INPUT_NONZERO_ANALOG) ~= 0
+                or (m.input & INPUT_Z_DOWN) ~= 0
+            )
+        then
+            float = false
+        end
+
     end
 end
 
