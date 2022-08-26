@@ -1,0 +1,17 @@
+extern const GeoLayout balloon_geo[];
+extern Lights1 balloon_balloon_lights;
+extern Lights1 balloon_rope_lights;
+extern u8 balloon_point_transparent_rgba32[];
+extern Vtx balloon_balloon_mesh_layer_5_vtx_0[105];
+extern Gfx balloon_balloon_mesh_layer_5_tri_0[];
+extern Vtx balloon_balloon_mesh_layer_1_vtx_0[103];
+extern Gfx balloon_balloon_mesh_layer_1_tri_0[];
+extern Vtx balloon_balloon_mesh_layer_1_vtx_1[12];
+extern Gfx balloon_balloon_mesh_layer_1_tri_1[];
+extern Gfx mat_balloon_shine[];
+extern Gfx mat_revert_balloon_shine[];
+extern Gfx mat_balloon_balloon[];
+extern Gfx mat_balloon_rope[];
+extern Gfx balloon_balloon_mesh_layer_5[];
+extern Gfx balloon_balloon_mesh_layer_1[];
+extern Gfx balloon_material_revert_render_settings[];
