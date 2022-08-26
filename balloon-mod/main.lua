@@ -1,12 +1,6 @@
 -- name: Balloon Mod
 -- description: Kinda an alternative to Moonjumping.\n\nBy eros\\#6fb900\\71\\#ffffff\\\n\nSpecial credits to Agent\\#ec7731\\X\\#ffffff\\.\n\nThis wouldn't exist without his help and his sticker library.
 
-local landActions = {
-    ACT_JUMP_LAND, ACT_LAVA_BOOST_LAND, ACT_TWIRL_LAND, ACT_BACKFLIP_LAND, ACT_FREEFALL_LAND,
-    ACT_AIR_THROW_LAND, ACT_LONG_JUMP_LAND, ACT_HOLD_JUMP_LAND, ACT_SIDE_FLIP_LAND, ACT_DOUBLE_JUMP_LAND,
-    ACT_TRIPLE_JUMP_LAND, ACT_HOLD_FREEFALL_LAND, ACT_GROUND_BONK, ACT_DIVE, ACT_DIVE_PICKING_UP,
-    ACT_DIVE_SLIDE, ACT_BUTT_SLIDE, ACT_DIVE_SLIDE
-}
 
 E_MODEL_BALLOON = smlua_model_util_get_id("balloon_geo")
 local canHaveBalloon = true
@@ -15,7 +9,14 @@ function mario_update_local(m)
     --if not the local player, ignore the rest of the function
     if m.playerIndex ~= 0 then return end
 
-    if (m.action & ACT_FLAG_AIR) == 0 and sticker == nil and not isInTable(m, landActions) then
+    if does_mario_have_normal_cap_on_head(m) ~= 1 then
+        canHaveBalloon = false
+        if sticker ~= nil then
+            despawn_sticker()
+        end
+    end
+
+    if (m.action & ACT_FLAG_AIR) == 0 and sticker == nil then
         spawn_sticker(m, E_MODEL_BALLOON, 180, 1)
         canHaveBalloon = false
     end
@@ -29,6 +30,7 @@ function mario_update_local(m)
     if (m.action & ACT_FLAG_AIR) ~= 0
     and m.pos.y < (m.peakHeight - 8)
     and (m.input & INPUT_A_PRESSED) ~= 0
+    and does_mario_have_normal_cap_on_head(m) ~= 0
     and sticker ~= nil
     then
             --shitty workaround to force the next animation
@@ -83,7 +85,7 @@ end
 function mario_on_set_action(m)
     --if not the local player, ignore the rest of the function
     if m.playerIndex ~= 0 then return end
-    if isInTable(m, landActions) and sticker == nil then
+    if sticker == nil and canHaveBalloon then
         spawn_sticker(m, E_MODEL_BALLOON, 180, 1)
     end
 end
