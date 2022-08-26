@@ -75,12 +75,14 @@ function mario_update_local(m)
 
         if float then
             set_mario_animation(m, MARIO_ANIM_SLEEP_IDLE)
+            m.marioBodyState.eyeState = MARIO_EYES_CLOSED
             if firstTimeDone then
                 m.vel.y = 20
             end
             if not firstTimeDone then
                 set_mario_action(m, ACT_FREEFALL, 0)
                 m.pos.y = m.pos.y + 5
+                audio_sample_play(audio_sample_load("whistle.mp3"), m.pos, 1)
                 firstTimeDone = true
             end
         else
@@ -97,6 +99,7 @@ function mario_update_local(m)
             )
         then
             float = false
+            play_character_sound(m, CHAR_SOUND_WHOA)
         end
 
     end
