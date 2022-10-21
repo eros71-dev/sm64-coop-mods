@@ -41,15 +41,17 @@ function mario_update(m)
     if m.playerIndex ~= 0 then return end
 
     if (
-    (m.controller.buttonPressed & Y_BUTTON) ~= 0 and m.action ~= ACT_CALIFORNIA and (m.action == ACT_IDLE or m.action == ACT_PANTING)
-    and (m.action & ACT_FLAG_AIR) == 0
-    and (m.action & ACT_FLAG_HANGING) == 0
-    and (m.action & ACT_FLAG_SWIMMING_OR_FLYING) == 0
-    and (m.action & ACT_RIDING_HOOT) == 0
-    and (m.action & ACT_FLAG_RIDING_SHELL) == 0
-    and (m.input & INPUT_NONZERO_ANALOG) == 0)
-    or
-    (m.action ~= ACT_END_WAVING_CUTSCENE and m.action ~= ACT_CALIFORNIA) then
+        ((m.controller.buttonPressed & Y_BUTTON) ~= 0 and m.action ~= ACT_CALIFORNIA and m.action == ACT_IDLE)
+        or
+        ((m.controller.buttonPressed & Y_BUTTON) ~= 0 and m.action ~= ACT_CALIFORNIA and m.action == ACT_PANTING)
+        and (m.action & ACT_FLAG_AIR) == 0
+        and (m.action & ACT_FLAG_HANGING) == 0
+        and (m.action & ACT_FLAG_SWIMMING_OR_FLYING) == 0
+        and (m.action & ACT_RIDING_HOOT) == 0
+        and (m.action & ACT_FLAG_RIDING_SHELL) == 0
+        and (m.input & INPUT_NONZERO_ANALOG) == 0
+    )
+    then
         set_mario_action(m, ACT_CALIFORNIA, 0)
     end
 end
