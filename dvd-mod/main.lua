@@ -1,7 +1,7 @@
 -- name: DVD Screensaver Mod
 -- description: This mod will show a DVD screensaver after 5 minutes of inactivity.\n\nBy \\#d6c899\\eros\\#6fb900\\71\\#ffffff\\\n\nDVD logo font by PuzzlyLogos.\nhttps://www.deviantart.com/puzzlylogos
 
-local waitTime = 5 * 60 * 60 -- 5 frames * 60 seconds * 60 minutes
+local waitTime = 5 * 60 * 30 -- 5 minutes * 6 seconds * 30 fps
 local timer = waitTime
 local renderStuff = false
 local xDir = 1 -- 0 = left, 1 = right
