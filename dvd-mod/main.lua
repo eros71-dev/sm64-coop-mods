@@ -29,9 +29,7 @@ function before_mario_update(m)
     if m.playerIndex ~= 0 then return end -- Only run for the local player
 
     if m.controller.buttonPressed ~= 0 or m.controller.buttonDown ~= 0 or m.controller.stickMag ~= 0 then
-        if timer < 10 then
-            timer = waitTime
-        end
+        timer = waitTime
         if renderStuff then
             -- Reset DVD logo stuff
             renderStuff = false
