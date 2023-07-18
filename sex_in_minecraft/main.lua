@@ -59,6 +59,44 @@ function SEQUENCE_ARGS(priority, seqId)
     return ((priority << 8) | seqId)
 end
 
+smlua_text_utils_dialog_replace(DIALOG_107, 1, 1, 95, 200,
+"Ghoustbusters\n\
+They're back in town\n\
+You need to pee?\n\
+That is so crazy\n\
+What the fuck?\n\
+You need to pee\n\
+You call the Ghoustbusters\n\
+They extract it\n\
+There was ghosts\n\
+In your bladder\n\
+What the fuck?\n\
+YAAAAAAAAAH\n\
+\n\
+\n\
+You need to take the pee\n\
+Crazy ghost pee-pee\n\
+That is insanity!\n\
+\n\
+\n\
+Ghoustbusters\n\
+Use their machine\n\
+To hook it up\n\
+To your dick\n\
+\n\
+What?\n\
+\n\
+It hurts?\n\
+\n\
+When they activate it to remove ghosts\n\
+\n\
+\n\
+\n\
+Wuuuuuut?\n\
+")
+
+smlua_audio_utils_replace_sequence(SEQ_LEVEL_SPOOKY, 16, 100, "bbh")
+
 hook_event(HOOK_MARIO_UPDATE, mario_update_local)
 hook_event(HOOK_ON_HUD_RENDER, on_hud_render)
 hook_event(HOOK_ON_LEVEL_INIT, on_level_init)
