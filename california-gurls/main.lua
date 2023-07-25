@@ -1,6 +1,8 @@
 -- name: California Gurls Emote
 -- description: This is a simple emote that plays the California Gurls song and makes your character dance.\n\nNow using the new lua animation system, \ncompatible with any character model (I hope)!\n\nHave fun!\n- eros71
 
+local SEQ_CALI = 99
+
 smlua_anim_util_register_animation("california_gurls_dance",
 0,
 0,
@@ -1676,6 +1678,11 @@ ACT_CALIFORNIA = allocate_mario_action(ACT_FLAG_STATIONARY | ACT_FLAG_IDLE)
 function mario_update(m)
     if m.playerIndex ~= 0 then return end
 
+	if gNetworkPlayers[0].name == "ScottFalco" then
+		djui_popup_create("I tried to make this update as quick as possible", 3)
+		djui_popup_create("Sorry if the mod has any new bugs lol", 3)
+	end
+
     if (
         ((m.controller.buttonPressed & Y_BUTTON) ~= 0 and m.action ~= ACT_CALIFORNIA and m.action == ACT_IDLE)
         or
@@ -1701,9 +1708,9 @@ function on_set_mario_action(m)
     if m.action == ACT_CALIFORNIA then
         music = get_current_background_music()
         stop_background_music(music)
-        play_music(0, SEQ_LEVEL_SLIDE, 1)
+        play_music(0, SEQ_CALI, 1)
     elseif m.prevAction == ACT_CALIFORNIA then
-        stop_background_music(SEQ_LEVEL_SLIDE)
+        stop_background_music(SEQ_CALI)
         play_music(0, music, 1)
     end
 end
@@ -1713,4 +1720,4 @@ hook_event(HOOK_ON_SET_MARIO_ACTION, on_set_mario_action)
 
 hook_mario_action(ACT_CALIFORNIA, act_california, INTERACT_PLAYER)
 
-smlua_audio_utils_replace_sequence(SEQ_LEVEL_SLIDE, 0x0D, 100, "cg")
+smlua_audio_utils_replace_sequence(SEQ_CALI, 0x0D, 100, "cg")
