@@ -1678,11 +1678,6 @@ ACT_CALIFORNIA = allocate_mario_action(ACT_FLAG_STATIONARY | ACT_FLAG_IDLE)
 function mario_update(m)
     if m.playerIndex ~= 0 then return end
 
-	if gNetworkPlayers[0].name == "ScottFalco" then
-		djui_popup_create("I tried to make this update as quick as possible", 3)
-		djui_popup_create("Sorry if the mod has any new bugs lol", 3)
-	end
-
     if (
         ((m.controller.buttonPressed & Y_BUTTON) ~= 0 and m.action ~= ACT_CALIFORNIA and m.action == ACT_IDLE)
         or
