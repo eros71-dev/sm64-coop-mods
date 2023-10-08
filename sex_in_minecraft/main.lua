@@ -59,7 +59,7 @@ function SEQUENCE_ARGS(priority, seqId)
     return ((priority << 8) | seqId)
 end
 
-smlua_text_utils_dialog_replace(DIALOG_107, 1, 1, 95, 200,
+smlua_text_utils_dialog_replace(DIALOG_107, 1, 2, 95, 200,
 "Ghoustbusters\n\
 They're back in town\n\
 You need to pee?\n\
